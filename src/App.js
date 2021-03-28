@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import { Row, Col, Layout, Menu } from 'antd';
+import "antd/dist/antd.css";
+import WorkspaceForm from './components/WorkspaceForm';
+import WorlspaceList from './components/WorlspaceList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { AppContextProvider } from './app-context';
+const { Header, Content, Footer } = Layout;
+
+const App = () => {
+
+  return (<>
+    <AppContextProvider>
+
+      <Layout>
+        <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+          
+        </Header>
+        <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+          <Row>
+            <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
+              <WorkspaceForm />
+            </Col>
+            <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
+              <WorlspaceList />
+            </Col>
+          </Row>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      </Layout>,
+
+    </AppContextProvider>
+  </>);
 }
 
 export default App;

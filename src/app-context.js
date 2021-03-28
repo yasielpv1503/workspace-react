@@ -1,17 +1,17 @@
-import React, {createContext, useContext, useState} from "react";
- 
+import React, { createContext, useContext, useState } from "react";
+
 const AppContext = createContext();
 
 const AppContextProvider = props => {
-    const [width, setWidth] = useState(false);    
+    const [workspaces, setWorkspaces] = useState([]);
 
-    const instanceApp = { 
-        width,
-        updateWindowWidth:(w)=>setWidth(w)
+    const instanceApp = {
+        workspaces,
+        createWorkSpace: (item) => workspaces.push(item)
 
-      };
-     return (
-        <AppContext.Provider  value={instanceApp}>
+    };
+    return (
+        <AppContext.Provider value={instanceApp}>
             {props.children}
         </AppContext.Provider>
     )
