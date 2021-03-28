@@ -49,7 +49,7 @@ const WorlspaceList = () => {
       dataIndex: 'operation',
       render: (_, record) =>
         <Popconfirm title="¿Confirma la eliminación del elemento?" onConfirm={() => handleDelete(record)}>
-          <DeleteOutlined size={48} color="danger"  />
+          <DeleteOutlined style={{color:"#f5222d",fontSize:28}} color="danger"  />
         </Popconfirm>
     },
   ];
