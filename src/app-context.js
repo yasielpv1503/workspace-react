@@ -7,8 +7,8 @@ const AppContextProvider = props => {
 
     const instanceApp = {
         workspaces,
-        createWorkSpace: (item) => workspaces.push(item)
-
+        createWorkSpace: (item) => setWorkspaces([...workspaces, item]),
+        deleteWorkspace: (item) => setWorkspaces([...workspaces.filter(e => e.id !== item.id)])
     };
     return (
         <AppContext.Provider value={instanceApp}>

@@ -1,58 +1,79 @@
-import React, {  } from 'react';
+import React, { useEffect } from 'react';
 import { useApp } from '../app-context';
-import { Row, Col, Card, Input, Typography, Table } from 'antd';
- 
+import { Row, Col, Card, Avatar, Popconfirm, Table, Button, Alert } from 'antd';
+import { getInitial } from '../helper/store';
+import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
+
 const WorlspaceList = () => {
-    const dataSource = [
-        {
-          key: '1',
-          name: 'Mike',
-          age: 32,
-          address: '10 Downing Street',
-        },
-        {
-          key: '2',
-          name: 'John',
-          age: 42,
-          address: '10 Downing Street',
-        },
-      ];
-      
-      const columns = [
-        {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-        },
-        {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
-        },
-        {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
-        },
-      ];
-    
 
-    return (
+  const { workspaces, deleteWorkspace } = useApp();
+  const handleDelete = (item) => {
+    if (typeof deleteWorkspace === 'function')
+      deleteWorkspace(item)
+  }
 
-        <Row>
-            <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
+  const columns = [
+    {
+      title: '',
+      dataIndex: 'color',
+      key: 'color',
+      render: text =>
+        <div style={{backgroundColor: text,borderLeft:"1px solid"+ text,height:40,width:10 }} />
+    },
+    {
+      title: 'Logo',
+      dataIndex: 'avatar',
+      key: 'avatar',
+      render: (text, record) =>
+        <Avatar src={text} size={48} style={{ backgroundColor: text }}>{getInitial(record.name)}</Avatar>
+    },
+    {
+      title: 'Nombre',
+      dataIndex: 'name',
+      key: 'name',
 
-                <Card title="Card title" bordered={false} >
-                    <Table dataSource={dataSource} columns={columns} />;
+    },
+    {
+      title: 'Equipo',
+      dataIndex: 'team',
+      key: 'team',
+      render: text =>
+        <Alert
+          message={text}
+          type="info"
+        />,
+    },
+
+    {
+      title: 'Acciones',
+      dataIndex: 'operation',
+      render: (_, record) =>
+        <Popconfirm title="¿Confirma la eliminación del elemento?" onConfirm={() => handleDelete(record)}>
+          <DeleteOutlined size={48} color="danger"  />
+        </Popconfirm>
+    },
+  ];
+
+
+
+
+
+  return (
+
+    <Row>
+      <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
+
+        <Card bordered={false} >
+          <Table dataSource={workspaces} columns={columns} />;
                 </Card>
 
-            </Col>
+      </Col>
 
-        </Row>
+    </Row>
 
 
 
-    );
+  );
 }
 
 

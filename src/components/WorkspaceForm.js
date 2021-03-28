@@ -27,9 +27,15 @@ const WorkspaceForm = props => {
         setColorOption(fetchColor())
     }, [])
 
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-        createWorkSpace(values)
+    const onFinish = (formData) => {
+       if(typeof createWorkSpace==='function')
+        createWorkSpace({
+            ...formData,
+            color,
+            logo,
+            team,
+            id: new Date().getTime()
+        })
     };
 
 
@@ -42,14 +48,14 @@ const WorkspaceForm = props => {
 
         <Row>
             <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
-                <Card title="Card title" bordered={false} >
+                <Card   bordered={false} >
                     <Form onFinish={onFinish} >
                         <Row>
                             <Col span={24} className="separe">
                                 <Text strong>Logo del espacio</Text>
                             </Col>
                             <Col span={24} >
-                                <Form.Item name="upload"  >
+                                <Form.Item name="avatar"  >
                                     <Space>
                                         <Avatar
                                             src={logo}
@@ -80,7 +86,7 @@ const WorkspaceForm = props => {
                                 <Form.Item
 
                                     name="name"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: 'Por favor entre correctamente el nombre.' }]}
                                 >
                                     <Input onChange={v => setInitial(getInitial(v.target.value))} placeholder="Ep: Mi espacio de trabajo" />
                                 </Form.Item>
@@ -95,7 +101,7 @@ const WorkspaceForm = props => {
                             <Col span={24}>
                                 <Form.Item
                                     name="url"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: 'Por favor entre correctamente la URL.' }]}
                                 >
                                     <Input
                                         placeholder="Ep:mi.dominio"
@@ -132,7 +138,7 @@ const WorkspaceForm = props => {
                             </Col>
                             <Col span={24} className="separe">
                                 <Radio.Group value={team} onChange={handleSizeChange}>
-                                    <Space size={24}>
+                                    <Space size={[8, 16]} wrap>
                                         {teamOption.map((team, key) => <Radio.Button key={key} size="large" className="select-btn" value={team.value}>{team.text}</Radio.Button>)}
                                     </Space>
                                 </Radio.Group>
@@ -156,7 +162,7 @@ const WorkspaceForm = props => {
                             </Col>
                             <Col span={24} className="separe">
 
-                                <Space size={12}>
+                                <Space size={[8, 16]} wrap>
                                     {colorOption.map((c, key) => <div className={color === c ? "color-selected" : "color"} key={key} onClick={() => setColor(c)}><Avatar
                                         size={color === c ? 36 : 48}
                                         style={{ backgroundColor: c }}></Avatar></div>)}
@@ -172,7 +178,7 @@ const WorkspaceForm = props => {
                             <Col span={24} className="separe">
                                 <Form.Item
                                     name="politics"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: 'Por favor entre correctamente las políticas de privacidad.' }]}
                                 >
                                     <TextArea />
                                 </Form.Item>

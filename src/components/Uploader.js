@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Field, reduxForm } from 'redux-form'
-import { useApp } from '../app-context';
-import { Row, Col, Upload, Button, Avatar, Form, message, Card, Space, Input, Typography, Radio } from 'antd';
-import { required } from '../helper/validator';
+import React, {  } from 'react';
+import { Upload, Button, message, Input, Typography } from 'antd';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 import { toBase64 } from '../helper/store';
-const { TextArea } = Input;
-const { Text, Link } = Typography;
 
 const Uploader = ({ onChange, logo }) => {
     const props = {
@@ -27,7 +22,7 @@ const Uploader = ({ onChange, logo }) => {
             <Upload maxCount={1} {...props}>
                 <Button icon={<UploadOutlined />}>Subir logo</Button>
             </Upload> :
-            <Button onClick={()=>onChange(null)} icon={<DeleteOutlined />}>Borrar</Button>
+            <Button onClick={() => onChange(null)} icon={<DeleteOutlined />}>Borrar</Button>
         }
     </>
     );
