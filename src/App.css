@@ -19,3 +19,7 @@
 .color{
    cursor: pointer;
 }
+
+.ant-upload-list-text-container {
+display: none;
+}

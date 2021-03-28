@@ -1,47 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { useApp } from '../app-context';
-import { Row, Col, Upload, Button, Avatar, Form, Card, Space, Input, Typography, Radio } from 'antd';
+import { Row, Col, Upload, Button, Avatar, Form, message, Card, Space, Input, Typography, Radio } from 'antd';
 import { required } from '../helper/validator';
 import { UploadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { toBase64, fetchOption, fetchColor, getInitial } from '../helper/store';
+import Uploader from './Uploader';
 const { TextArea } = Input;
 const { Text, Link } = Typography;
 
-const fethOption = () => {
-    return [
-        { value: "1", text: "Solo yo" },
-        { value: "2-10", text: "2-10" },
-        { value: "11-25", text: "11-25" },
-        { value: "26-50", text: "26-50" },
-        { value: "151-100", text: "51-100" },
-        { value: "100+", text: "100+" },
-    ]
-}
 
-const fethColor = () => {
-    return [
-        "#39b0ff",
-        "#04b58b",
-        "#3e9c4b",
-        "#b6bc00",
-        "#e59100",
-        "#e55c00",
-        "#ee1f50",
-        "#d6198a",
-        "#b321f1",
-    ]
-}
+
+
 const WorkspaceForm = props => {
     const { createWorkSpace } = useApp();
 
     const [team, setTeam] = useState("1")
+    const [initial, setInitial] = useState("A")
     const [color, setColor] = useState("")
+    const [logo, setLogo] = useState(null)
     const [teamOption, setTeamOption] = useState([])
     const [colorOption, setColorOption] = useState([])
 
     React.useEffect(() => {
-        setTeamOption(fethOption())
-        setColorOption(fethColor())
+        setTeamOption(fetchOption())
+        setColorOption(fetchColor())
     }, [])
 
     const onFinish = (values) => {
@@ -50,13 +33,6 @@ const WorkspaceForm = props => {
     };
 
 
-    const normFile = (e) => {
-        console.log('Upload event:', e);
-        if (Array.isArray(e)) {
-            return e;
-        }
-        return e && e.fileList;
-    };
 
     const handleSizeChange = e => {
         setTeam(e.target.value)
@@ -66,7 +42,6 @@ const WorkspaceForm = props => {
 
         <Row>
             <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
-
                 <Card title="Card title" bordered={false} >
                     <Form onFinish={onFinish} >
                         <Row>
@@ -74,15 +49,14 @@ const WorkspaceForm = props => {
                                 <Text strong>Logo del espacio</Text>
                             </Col>
                             <Col span={24} >
-                                <Form.Item name="upload" valuePropName="fileList" getValueFromEvent={normFile}>
+                                <Form.Item name="upload"  >
                                     <Space>
                                         <Avatar
+                                            src={logo}
                                             size={64}
-                                            style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
+                                            style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>{initial}</Avatar>
 
-                                        <Upload name="logo" action="/upload.do" listType="picture">
-                                            <Button icon={<UploadOutlined />}>Subir logo</Button>
-                                        </Upload>
+                                        <Uploader logo={logo} onChange={setLogo} />
                                     </Space>
                                 </Form.Item>
                             </Col>
@@ -104,10 +78,11 @@ const WorkspaceForm = props => {
                             </Col>
                             <Col span={24} className="separe">
                                 <Form.Item
+
                                     name="name"
                                     rules={[{ required: true, message: 'Please input your username!' }]}
                                 >
-                                    <Input placeholder="Ep: Mi espacio de trabajo" />
+                                    <Input onChange={v => setInitial(getInitial(v.target.value))} placeholder="Ep: Mi espacio de trabajo" />
                                 </Form.Item>
                             </Col>
 
@@ -207,7 +182,7 @@ const WorkspaceForm = props => {
 
 
                         <Form.Item wrapperCol={{ span: 24 }}>
-                            <Button style={{ float:'right' }} type="primary" htmlType="submit">
+                            <Button style={{ float: 'right' }} type="primary" htmlType="submit">
                                 Crear
                             </Button>
                         </Form.Item>
