@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Field, reduxForm } from 'redux-form'
+import React, { useState } from 'react';
 import { useApp } from '../app-context';
-import { Row, Col, Upload, Button, Avatar, Form, message, Card, Space, Input, Typography, Radio } from 'antd';
-import { required } from '../helper/validator';
-import { UploadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { toBase64, fetchOption, fetchColor, getInitial } from '../helper/store';
+import { Row, Col, Button, Avatar, Form, Card, Space, Input, Typography, Radio } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { fetchOption, fetchColor, getInitial } from '../helper/common';
 import Uploader from './Uploader';
 const { TextArea } = Input;
-const { Text, Link } = Typography;
+const { Text,Title } = Typography;
 
 
 
 
-const WorkspaceForm = props => {
+const WorkspaceForm = () => {
     const { createWorkSpace } = useApp();
 
     const [team, setTeam] = useState("1")
@@ -49,6 +47,7 @@ const WorkspaceForm = props => {
         <Row>
             <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
                 <Card   bordered={false} >
+                <Title level={4} strong>Configuraciones</Title>
                     <Form onFinish={onFinish} >
                         <Row>
                             <Col span={24} className="separe">

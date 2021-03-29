@@ -1,7 +1,7 @@
 import React, {  } from 'react';
-import { Upload, Button, message, Input, Typography } from 'antd';
+import { Upload, Button, message } from 'antd';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
-import { toBase64 } from '../helper/store';
+import { toBase64 } from '../helper/common';
 
 const Uploader = ({ onChange, logo }) => {
     const props = {

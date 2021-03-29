@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useApp } from '../app-context';
-import { Row, Col, Card, Avatar, Popconfirm, Table, Button, Alert } from 'antd';
-import { getInitial } from '../helper/store';
-import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Row, Col, Card, Avatar, Popconfirm, Table, Alert,Typography } from 'antd';
+import { getInitial } from '../helper/common';
+import { DeleteOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 const WorlspaceList = () => {
 
@@ -22,8 +23,8 @@ const WorlspaceList = () => {
     },
     {
       title: 'Logo',
-      dataIndex: 'avatar',
-      key: 'avatar',
+      dataIndex: 'logo',
+      key: 'logo',
       render: (text, record) =>
         <Avatar src={text} size={48} style={{ backgroundColor: text }}>{getInitial(record.name)}</Avatar>
     },
@@ -54,16 +55,13 @@ const WorlspaceList = () => {
     },
   ];
 
-
-
-
-
   return (
 
     <Row>
       <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
 
         <Card bordered={false} >
+          <Title level={4} strong>Registros</Title>
           <Table dataSource={workspaces} columns={columns} />;
                 </Card>
 
