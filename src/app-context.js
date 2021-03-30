@@ -3,12 +3,11 @@ import React, { createContext, useContext, useState } from "react";
 const AppContext = createContext();
 
 const AppContextProvider = props => {
-    const [workspaces, setWorkspaces] = useState([]);
+    const [workspace, setWorkspace] = useState({});
 
     const instanceApp = {
-        workspaces,
-        createWorkSpace: (item) => setWorkspaces([...workspaces, item]),
-        deleteWorkspace: (item) => setWorkspaces([...workspaces.filter(e => e.id !== item.id)])
+        workspace,
+        createWorkSpace: (wsp) => setWorkspace(wsp),
     };
     return (
         <AppContext.Provider value={instanceApp}>

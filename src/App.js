@@ -15,11 +15,11 @@ const App = () => {
         </Header>
         <Content className="site-layout" style={{ padding: '1px0 50px', marginTop: 64, paddingTop: 20 }}>
           <Row gutter={16}>
-            <Col  xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
+            <Col  xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} lg={{ span: 10 }}>
              
               <WorkspaceForm />
             </Col>
-            <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
+            <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 12 }} lg={{ span: 14 }}>
               <WorlspaceList />
             </Col>
           </Row>

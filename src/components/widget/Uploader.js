@@ -1,7 +1,7 @@
 import React, {  } from 'react';
 import { Upload, Button, message } from 'antd';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
-import { toBase64 } from '../helper/common';
+import { toBase64 } from '../../helper/common';
 
 const Uploader = ({ onChange, logo }) => {
     const props = {
@@ -14,7 +14,6 @@ const Uploader = ({ onChange, logo }) => {
         onChange: info => {
             if (!logo)
                 toBase64(info.fileList[0].originFileObj).then(base64 => onChange(base64))
-
         },
     };
     return (<>
