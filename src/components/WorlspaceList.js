@@ -25,9 +25,9 @@ const WorlspaceList = () => {
         <SvgProxy selector={"#e4"} fill={workspace.color?workspace.color:""} />
         <SvgProxy selector={"#e5"} fill={workspace.color?workspace.color:""} />
         <SvgProxy selector={"#e6"} fill={workspace.color?workspace.color:""} />
-        <SvgProxy selector={"#url"}>{(workspace.url?workspace.url:"")+".dofleini.com"}</SvgProxy>
-        <SvgProxy selector={"#name1"}>Plankton - {workspace.name?workspace.name:""}</SvgProxy>
+        <SvgProxy selector={"#spacename"}>{"Plankton - "+(workspace.name?workspace.name:"")}</SvgProxy>
 
+        <SvgProxy selector={"#url"}>{(workspace.url?workspace.url:"")+".dofleini.com"}</SvgProxy>
 
 
       </SvgLoader>
